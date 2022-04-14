@@ -11,7 +11,7 @@ router.get('/all', booksController.getBooks, (req, res) => {
 });
 
 router.get('/modal/:bookID', booksController.getMoreBookData, (req, res) => {
-  res.status(200).json(res.locals.getMoreBookData);
+  res.status(200).json(res.locals.bookData);
 });
 
 router.post('/:id', booksController.addBook, (req, res) => {
