@@ -9,7 +9,7 @@ booksController.getBooks = (req, res, next) => {
   const input = [];
   const userId = req.params.id;
   let booksQuery =
-    'SELECT rl._id AS readingListId, u.username, rl.user_id AS userId, b.title, b.author, b.genre_id, g.genre, rs.status, rl.recommend, rl.review \
+    'SELECT rl._id AS readingListId, u.username, rl.user_id AS userId, b.*, g.genre, rs.status, rl.recommend, rl.review \
         FROM ((((reading_lists AS rl\
         RIGHT JOIN users AS u ON rl.user_id = u._id)\
         RIGHT JOIN books AS b ON rl.book_id = b._id)\
