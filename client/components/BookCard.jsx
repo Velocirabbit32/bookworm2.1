@@ -1,43 +1,52 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles.scss';
 import Button from './Button';
+
 const BookCard = props =>{
-// ---------------STATE FOR BOOK COMPONENT-----------------------------
-const { title, status, userid, bookID} = props.books;
-let { type } = props;
 
+  // ---------------STATE FOR BOOK COMPONENT-----------------------------
+  const { title, status, userid, bookID, readinglistid, statusId } = props.books;
+  let { type } = props;
+  const [readStatus, setStatus] = useState(1);
 
+  // console.log(readStatus)
 
-//------------UPDATE READ STATUS FROM PRESENT TO PAST------------------
+  //------------UPDATE READ STATUS FROM PRESENT TO PAST------------------
 
-const updateStatus = props =>{
-  type = 'change book status to past';
-  console.log(type + userid)
-  var element = document.getElementById("currentCard");
-  element.remove();
-    // useEffect(()=>{
-    //   fetch(`/books/${bookID}`, {
-    //     method: 'PATCH',
-    //     body: JSON.stringify({
-    //     status: 1,
-    //     }),
-    //     headers: {
-    //       'Content-type': 'application/json; charset=UTF-8',  
-    //     },
-    //   })
-    //     .then(res => res.json()) 
-    //     .then(res => {
-    //     console.log(res);
+  const updateStatus = props => {
+
+    setStatus(readStatus + 1 );
+    var element = document.getElementById("currentCard");
+    element.remove();
+    // console.log(readStatus);
+
+    // if(readStatus === 2) {
+    // console.log('about to fetch')
+ 
+    //   // useEffect(()=>{
+    //   //   console.log('entered useEffect')
+    //     fetch(`/books/${readinglistid}`, {
+    //       method: 'PATCH',
+    //       body: JSON.stringify({
+    //       statusId: 2,
+    //       }),
+    //       headers: {
+    //         'Content-type': 'application/json; charset=UTF-8',  
+    //       },
     //     })
-    //     .catch(err=>{console.log(err)});
-    // },[]);
-
-}
+    //       .then(res => res.json()) 
+    //       .then(res => {
+    //       console.log(res);
+    //       })
+    //       .catch(err=>{console.log(err)});
+    //   // },[]);
+    // }
+  }
 
 //-----------------------checks for other user data-----------------------------
 if(userid !== 1){
 
-  if(type === 'otherpresent' && status === 'present'){  
+  if(type === 'otherpresent' && status === 'present' || statusId === 1){  
 
 // --------------- BOOK COMPONENT DISPLAYS CURRENT READS... ----------------
 

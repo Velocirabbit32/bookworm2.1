@@ -22,6 +22,8 @@ router.patch('/:id', booksController.updateBookStatus, (req, res) => {
   res.status(200).json(res.locals.updatedBook);
 });
 
+
+
 router.delete('/:id', booksController.removeBook, (req, res) => {
   res.status(200).json(res.locals.deletedBook);
 });
