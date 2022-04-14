@@ -79,6 +79,7 @@ booksController.addBook = (req, res, next) => {
 };
 
 booksController.updateBookStatus = (req, res, next) => {
+
   const input = [];
   const readingListId = req.params.id;
   const { statusId } = req.body;
@@ -99,7 +100,7 @@ booksController.updateBookStatus = (req, res, next) => {
         RETURNING *';
   db.query(statusChange, input)
     .then((dbRes) => {
-      res.locals.updatedBook = dbRes.rows;
+      res.locals.updatedBook = dbRes.rows[0];
       return next();
     })
     .catch((err) => {

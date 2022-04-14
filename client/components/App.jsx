@@ -14,7 +14,7 @@ function App(){
         </div>
       <Main />
         <div id="otherHeader">
-          <h2>My Friends Reads:</h2>
+          <h2>My Friend's Reads:</h2>
         </div>
       <Other />
       
