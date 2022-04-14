@@ -1,7 +1,7 @@
+require('dotenv').config();
 const path = require('path');
 const fetch = require('node-fetch');
 const db = require(path.resolve(__dirname, '../models/bookModels'));
-// import fetch from 'node-fetch';
 
 const booksController = {};
 
@@ -135,22 +135,18 @@ booksController.removeBook = (req, res, next) => {
 
 booksController.getMoreBookData = async (req, res, next) => {
   console.log('---> entering getMoreBookData');
-  console.log('req.params.bookID: ', req.params.bookID);
+  const api_key = process.env.API_KEY;
   const { bookID } = req.params;
-  console.log('bookID: ', bookID);
+//   console.log('bookID: ', bookID);
+//   console.log('api key: ', api_key);
 
   try {
     const response = await fetch(
-      `https://www.googleapis.com/books/v1/volumes?q=isbn:${bookID}&key=AIzaSyCRG1gYlMC6akbjGUb_JuiNFi3-Kc92yXE`
+      `https://www.googleapis.com/books/v1/volumes?q=isbn:${bookID}&key=${api_key}`
     );
-    // const response = await fetch(
-    //   `https://www.googleapis.com/books/v1/volumes?q=isbn:9780128209042&key=AIzaSyCRG1gYlMC6akbjGUb_JuiNFi3-Kc92yXE`
-    // );
-    // console.log(response);
     const data = await response.json();
-    // console.log(data);
     console.log(data.items[0].volumeInfo);
-    res.locals.getMoreBookData = data.items[0].volumeInfo;
+    res.locals.bookData = data.items[0].volumeInfo;
     return next();
   } catch (err) {
     return next({
