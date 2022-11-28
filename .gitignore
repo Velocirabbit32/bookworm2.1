@@ -3,3 +3,5 @@ node_modules/
 .env
 
 database/starwars_postgres_create.sql
+
+API_KEY=AIzaSyAliXvsvDAoJK9MB9X2Exou55eDI_NlEX0
